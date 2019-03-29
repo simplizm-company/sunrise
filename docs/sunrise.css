@@ -1,0 +1,7 @@
+@charset "utf-8";
+
+.sunrise-outer {overflow-x: auto; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 9999; background: rgba(0, 0, 0, 0.7);}
+.sunrise-inner {display: flex; flex-direction: row; min-width: 100%; min-height: 100%;}
+.sunrise-scene {margin: auto; padding: 50px;}
+.sunrise-frame {padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px);}
+.sunrise-frame.sunrise-visible {opacity: 1; transform: translateY(0); transition: all 500ms;}
