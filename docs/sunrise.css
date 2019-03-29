@@ -5,3 +5,10 @@
 .sunrise-scene {margin: auto; padding: 50px;}
 .sunrise-frame {padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px);}
 .sunrise-frame.sunrise-visible {opacity: 1; transform: translateY(0); transition: all 500ms;}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    /* IE 10, IE 11 */
+    .sunrise-inner {display: table; width: 100%; height: 100%;}
+    .sunrise-scene {display: table-cell; vertical-align: middle; text-align: center;}
+    .sunrise-frame {display: inline-block; text-align: left;}
+}
