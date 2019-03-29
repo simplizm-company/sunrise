@@ -104,7 +104,7 @@
         var _ = this;
 
         if (_[method]) {
-            _[method]();
+            _[method](arguments[1]);
         } else {
             console.log('This is not the method of Sunrise.');
         }
