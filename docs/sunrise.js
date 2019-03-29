@@ -83,7 +83,9 @@
     Sunrise.prototype.closePopup = function () {
         var _ = this;
 
-        _.element.popup.appendTo(_.element.body).hide();
+        if (!_.options.ajax) {
+            _.element.popup.appendTo(_.element.body).hide();
+        }
         _.element.outer.remove();
         _.element.body.attr('style', _.element.body.data('originStyle'));
     }
