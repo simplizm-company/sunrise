@@ -19,7 +19,10 @@
             _.defaults = {
                 target: null,
                 ajax: false,
-                dataType: 'html'
+                dataType: 'html',
+
+                openCallback: function () {},
+                closeCallback: function () {}
             }
 
             _.options = $.extend({}, _.defaults, settings);
@@ -70,11 +73,13 @@
                 dataType: _.options.dataType,
                 success: function (popup) {
                     _.element.target = $(popup);
+                    _.options.openCallback(_.element.target);
                     _.element.popup = _.element.target.appendTo(_.element.frame).show();
                     _.element.frame.addClass('sunrise-visible');
                 }
             });
         } else {
+            _.options.openCallback(_.element.target);
             _.element.popup = _.element.target.appendTo(_.element.frame).show();
             _.element.frame.addClass('sunrise-visible');
         }
@@ -86,6 +91,7 @@
         if (!_.options.ajax) {
             _.element.popup.appendTo(_.element.body).hide();
         }
+        _.options.closeCallback(_.element.target);
         _.element.outer.remove();
         _.element.body.attr('style', _.element.body.data('originStyle'));
     }

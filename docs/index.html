@@ -222,6 +222,21 @@ td, th {vertical-align: middle;}
                         ajax: true
                     })">Sunrise 4</button>
                 </section>
+                <section class="demo">
+                    <div class="desc">
+                        <h3 class="tit">5. popup callback</h3>
+                    </div>
+                    <button onclick="sunrise({
+                        target: './ajax/popup1.html',
+                        ajax: true,
+                        openCallback: function (target) {
+                            console.log('open', target);
+                        },
+                        closeCallback: function (target) {
+                            console.log('close', target);
+                        }
+                    })">Sunrise 5</button>
+                </section>
             </section>
         </div>
         <script>
