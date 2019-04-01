@@ -3,7 +3,7 @@
 body {position: relative;}
 body.sunrise-fixed {overflow: hidden; position: fixed;}
 
-.sunrise-outer {overflow-x: auto; position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 9999; background: rgba(0, 0, 0, 0.7);}
+.sunrise-outer {overflow-x: auto; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: rgba(0, 0, 0, 0.7);}
 .sunrise-inner {display: flex; flex-direction: row; min-width: 100%; min-height: 100%;}
 .sunrise-scene {margin: auto; padding: 50px;}
 .sunrise-frame {padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px);}
