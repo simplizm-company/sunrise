@@ -56,7 +56,8 @@
     Sunrise.prototype.layoutMarkup = function () {
         var _ = this;
 
-        _.element.body.data('originStyle', _.element.body.attr('style') === undefined ? null : _.element.body.attr('style')).css({'overflow': 'hidden'});
+        _.initial.scrollTop = $(window).scrollTop();
+        _.element.body.addClass('sunrise-fixed').css({'top': -_.initial.scrollTop});
         _.element.outer = _.element.body.append(_.markups.outer).children('.sunrise-outer');
         _.element.inner = _.element.outer.append(_.markups.inner).children('.sunrise-inner');
         _.element.scene = _.element.inner.append(_.markups.scene).children('.sunrise-scene');
@@ -93,7 +94,8 @@
         }
         _.options.closeCallback(_.element.target);
         _.element.outer.remove();
-        _.element.body.attr('style', _.element.body.data('originStyle'));
+        _.element.body.removeClass('sunrise-fixed').css({'top': 0});
+        $(window).scrollTop(_.initial.scrollTop);
     }
 
     Sunrise.prototype.eventsRegister = (function () {
