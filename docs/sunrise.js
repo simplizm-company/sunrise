@@ -33,6 +33,7 @@
 
             _.markups = {
                 outer: '<div class="sunrise-outer">',
+                scrll: '<div class="sunrise-scrll">',
                 inner: '<div class="sunrise-inner">',
                 scene: '<div class="sunrise-scene">',
                 frame: '<div class="sunrise-frame">'
@@ -59,7 +60,8 @@
         _.initial.scrollTop = $(window).scrollTop();
         _.element.body.addClass('sunrise-fixed');
         _.element.outer = _.element.body.append(_.markups.outer).children('.sunrise-outer');
-        _.element.inner = _.element.outer.append(_.markups.inner).children('.sunrise-inner');
+        _.element.scrll = _.element.outer.append(_.markups.scrll).children('.sunrise-scrll');
+        _.element.inner = _.element.scrll.append(_.markups.inner).children('.sunrise-inner');
         _.element.scene = _.element.inner.append(_.markups.scene).children('.sunrise-scene');
         _.element.frame = _.element.scene.append(_.markups.frame).children('.sunrise-frame');
     }
@@ -76,13 +78,13 @@
                     _.element.target = $(popup);
                     _.options.openCallback(_.element.target);
                     _.element.popup = _.element.target.appendTo(_.element.frame).show();
-                    _.element.frame.addClass('sunrise-visible');
+                    _.element.outer.addClass('sunrise-visible');
                 }
             });
         } else {
             _.options.openCallback(_.element.target);
             _.element.popup = _.element.target.appendTo(_.element.frame).show();
-            _.element.frame.addClass('sunrise-visible');
+            _.element.outer.addClass('sunrise-visible');
         }
     }
 

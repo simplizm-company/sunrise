@@ -1,13 +1,14 @@
 @charset "utf-8";
 
-body {position: relative;}
+body {position: relative; -webkit-overflow-scrolling: touch;}
 body.sunrise-fixed {overflow: hidden;}
 
-.sunrise-outer {overflow: auto; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: rgba(0, 0, 0, 0.7);}
-.sunrise-inner {display: flex; flex-direction: row; min-width: 100%; min-height: 100%;}
-.sunrise-scene {margin: auto; padding: 50px;}
-.sunrise-frame {padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px);}
-.sunrise-frame.sunrise-visible {opacity: 1; transform: translateY(0); transition: all 500ms;}
+.sunrise-outer {position: fixed; top: -1px; left: -1px; width: calc(100vw + 2px); height: calc(100vh + 2px); z-index: 9999; background-color: rgba(0, 0, 0, 0.5); transform: translateZ(0);}
+.sunrise-scrll {overflow: auto; position: relative; width: 100vw; height: 100vh;}
+.sunrise-inner {display: flex; flex-direction: row; position: relative; min-width: 100%; min-height: 100%; cursor: url(images/close_23x23_white.png), pointer;}
+.sunrise-scene {position: relative; margin: auto; padding: 50px; cursor: url(images/close_23x23_white.png), pointer;}
+.sunrise-frame {overflow: hidden; position: relative; padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px); cursor: default; transition: opacity 500ms, transform 500ms;}
+.sunrise-outer.sunrise-visible .sunrise-frame {opacity: 1; transform: translateY(0);}
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     /* IE 10, IE 11 */
