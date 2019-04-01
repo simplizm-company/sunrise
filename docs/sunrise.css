@@ -1,12 +1,12 @@
 @charset "utf-8";
 
 body {position: relative;}
-body.sunrise-fixed {overflow: hidden; position: fixed;}
+body.sunrise-fixed {overflow: hidden;}
 
 .sunrise-outer {overflow: auto; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; background: rgba(0, 0, 0, 0.7);}
 .sunrise-inner {display: flex; flex-direction: row; min-width: 100%; min-height: 100%;}
 .sunrise-scene {margin: auto; padding: 50px;}
-.sunrise-frame {padding: 30px; border-radius: 5px; background: red; opacity: 0; transform: translateY(50px);}
+.sunrise-frame {padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px);}
 .sunrise-frame.sunrise-visible {opacity: 1; transform: translateY(0); transition: all 500ms;}
 
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
