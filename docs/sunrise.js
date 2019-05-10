@@ -59,7 +59,7 @@
 
         _.initial.scrollTop = $(window).scrollTop();
         _.element.body.addClass('sunrise-fixed');
-        _.element.outer = _.element.body.append(_.markups.outer).children('.sunrise-outer');
+        _.element.outer = _.element.body.append(_.markups.outer).children('.sunrise-outer:last-child');
         _.element.scrll = _.element.outer.append(_.markups.scrll).children('.sunrise-scrll');
         _.element.inner = _.element.scrll.append(_.markups.inner).children('.sunrise-inner');
         _.element.scene = _.element.inner.append(_.markups.scene).children('.sunrise-scene');
