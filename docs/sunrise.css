@@ -10,6 +10,9 @@ body.sunrise-fixed {overflow: hidden;}
 .sunrise-frame {overflow: hidden; position: relative; padding: 30px; border-radius: 5px; background: #ffffff; opacity: 0; transform: translateY(50px); cursor: default; transition: opacity 500ms, transform 500ms;}
 .sunrise-outer.sunrise-visible .sunrise-frame {opacity: 1; transform: translateY(0);}
 
+.sunrise-outer.cursor-default .sunrise-inner {cursor: default;}
+.sunrise-outer.cursor-default .sunrise-scene {cursor: default;}
+
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
     /* IE 10, IE 11 */
     .sunrise-inner {display: table; width: 100%; height: 100%;}

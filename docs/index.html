@@ -243,6 +243,34 @@ td, th {vertical-align: middle;}
                         }
                     })">Sunrise 5</button>
                 </section>
+                <section class="demo">
+                    <div class="desc">
+                        <h3 class="tit">6. close confirm</h3>
+                    </div>
+                    <div id="sunrise6" style="display: none;">
+                        <input type="text" name="input1">
+                        <input type="text" name="input2" value="default value">
+                        <button type="button" onclick="sunrise6.sunrise('closePopup');">close</button>
+                    </div>
+                    <button onclick="sunrise6 = sunrise({
+                        target: '#sunrise6',
+                        closeConfirm: ['input1', 'input2'],
+                        closeConfirmText: 'Are you sure?',
+                        backgroundClose: false
+                    })">Sunrise 6</button>
+                </section>
+                <section class="demo">
+                    <div class="desc">
+                        <h3 class="tit">7. ajax close confirm</h3>
+                    </div>
+                    <button onclick="sunrise7 = sunrise({
+                        target: './ajax/popup7.html',
+                        ajax: true,
+                        closeConfirm: ['input1', 'input2'],
+                        closeConfirmText: 'Are you sure?',
+                        backgroundClose: false
+                    })">Sunrise 7</button>
+                </section>
             </section>
         </div>
         <script>

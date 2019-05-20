@@ -18,6 +18,9 @@
 
             _.defaults = {
                 target: null,
+                closeConfirm: null,
+                closeConfirmText: 'Are you sure?',
+                backgroundClose: true,
                 ajax: false,
                 dataType: 'html',
 
@@ -25,10 +28,12 @@
                 closeCallback: function () {}
             }
 
-            _.options = $.extend({}, _.defaults, settings);
+            _.options = $.extend(true, _.defaults, settings);
 
             _.initial = {
-                fnidx: ++fnidx
+                fnidx: ++fnidx,
+                saveDefaultValue: [],
+                isClose: true
             }
 
             _.markups = {
@@ -66,6 +71,24 @@
         _.element.frame = _.element.scene.append(_.markups.frame).children('.sunrise-frame');
     }
 
+    Sunrise.prototype.cursorChecker = function () {
+        var _ = this;
+
+        if (!_.options.backgroundClose) {
+            _.element.outer.addClass('cursor-default');
+        }
+    }
+
+    Sunrise.prototype.saveDefaultValue = function () {
+        var _ = this;
+
+        if (_.options.closeConfirm) {
+            $.each(_.options.closeConfirm, function () {
+                _.initial.saveDefaultValue.push(_.element.popup.find('[name='+this+']').val());
+            });
+        }
+    }
+
     Sunrise.prototype.drawPopup = function () {
         var _ = this;
 
@@ -79,35 +102,64 @@
                     _.options.openCallback(_.element.target);
                     _.element.popup = _.element.target.appendTo(_.element.frame).show();
                     _.element.outer.addClass('sunrise-visible');
+                    _.saveDefaultValue();
                 }
             });
         } else {
             _.options.openCallback(_.element.target);
             _.element.popup = _.element.target.appendTo(_.element.frame).show();
             _.element.outer.addClass('sunrise-visible');
+            _.saveDefaultValue();
         }
     }
 
     Sunrise.prototype.closePopup = function () {
         var _ = this;
 
-        if (!_.options.ajax) {
-            _.element.popup.appendTo(_.element.body).hide();
+        _.closeConfirmCheck();
+
+        if (!_.initial.isClose) {
+            _.initial.isClose = confirm(_.options.closeConfirmText);
         }
-        _.options.closeCallback(_.element.target);
-        _.element.outer.remove();
-        _.element.body.removeClass('sunrise-fixed');
-        $(window).scrollTop(_.initial.scrollTop);
+        if (_.initial.isClose) {
+            if (!_.options.ajax) {
+                _.element.popup.appendTo(_.element.body).hide();
+                if (_.options.closeConfirm) {
+                    $.each(_.options.closeConfirm, function (i) {
+                        _.element.popup.find('[name='+this+']').val(_.initial.saveDefaultValue[i]);
+                    });
+                }
+            }
+            _.options.closeCallback(_.element.target);
+            _.element.outer.remove();
+            _.element.body.removeClass('sunrise-fixed');
+            $(window).scrollTop(_.initial.scrollTop);
+        }
+    }
+
+    Sunrise.prototype.closeConfirmCheck = function () {
+        var _ = this;
+
+        if (_.options.closeConfirm) {
+            $.each(_.options.closeConfirm, function (i) {
+                if (_.element.popup.find('[name='+this+']').val() != _.initial.saveDefaultValue[i]) {
+                    _.initial.isClose = false;
+                    return false;
+                }
+            });
+        }
     }
 
     Sunrise.prototype.eventsRegister = (function () {
         return {
             close: function (_) {
-                $(document).on(_.events.click, function (e) {
-                    if (e.target === _.element.inner[0] || e.target === _.element.scene[0]) {
-                        _.closePopup();
-                    }
-                });
+                if (_.options.backgroundClose) {
+                    $(document).on(_.events.click, function (e) {
+                        if (e.target === _.element.inner[0] || e.target === _.element.scene[0]) {
+                            _.closePopup();
+                        }
+                    });
+                }
             }
         }
     })();
@@ -126,6 +178,7 @@
         var _ = this;
 
         _.layoutMarkup();
+        _.cursorChecker();
         _.drawPopup();
 
         _.eventsRegister.close(_);
